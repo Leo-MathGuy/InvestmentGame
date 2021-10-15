@@ -53,8 +53,8 @@ class askctl:
 	def __init__():
 		pass
 	def mainLoop():
-		opts = {"Invest": "I", "Banks": "B", "Wait":"W", "Stats":"S", "Settings":"X"}
-		ask(f"Day {day}\nWhat do you want to do?","Name = Actions", False, **opts)
+		opts = {"Invest": "I", "Banks": "B", "Wait":"W", "Stats":"S", "Settings":"X", "Exit":"E"}
+		return ask(f"Day {day}\nWhat do you want to do?","Name = Actions", False, **opts)
 
 #Tutorial
 def tutorial():
@@ -62,8 +62,10 @@ def tutorial():
 
 ### Main Game Loop ###
 def main_game():
-	option = askctl.mainLoop()
-
+	while True:
+		option = askctl.mainLoop()
+		if option == "E":
+			break
 
 ##Beginning##
 
