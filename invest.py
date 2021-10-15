@@ -26,7 +26,7 @@ ghard = gamemode("Hard", False, 75, 150)
 gvhard = gamemode("Very Hard", True, 50, 200)
 gbrut = gamemode("Brutal", True, 30, 500)
 
-def ask(q, h, **kwargs, help="True"):  #Universal ask function. Provide quesiton, help, and kwargs as option:return
+def ask(q, h,  help="True", **kwargs):  #Universal ask function. Provide quesiton, help, and kwargs as option:return
 	optionl = list(kwargs.keys())
 	options = ""
 	for i in range(0, len(optionl)):
@@ -34,13 +34,13 @@ def ask(q, h, **kwargs, help="True"):  #Universal ask function. Provide quesiton
 		options += "/"
 
 	if help:
-		options += "help"
+		options += "Help"
 	else:
-		options = options[:-1
+		options = options[:-1]
 
 	while True:
 		inpt = input("{} ({}): ".format(q, options))
-		if inpt == "help" && help:
+		if inpt == "help" and help:
 			print(h)
 		else:
 			if inpt in optionl:
@@ -50,10 +50,11 @@ def ask(q, h, **kwargs, help="True"):  #Universal ask function. Provide quesiton
 			print("Error: Unknown Input. Please enter valid option\n")
 
 class askctl:
-	def __init__:
+	def __init__():
 		pass
 	def mainLoop():
-		ask(f"Day {day}\nWhat do you want to do?","Name = Actions", {Invest: "I", Banks: "B", Wait:"W", Stats:"S", Settings:"X"})
+		opts = {"Invest": "I", "Banks": "B", "Wait":"W", "Stats":"S", "Settings":"X"}
+		ask(f"Day {day}\nWhat do you want to do?","Name = Actions", False, **opts)
 
 #Tutorial
 def tutorial():
