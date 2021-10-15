@@ -53,7 +53,7 @@ class askctl:
 	def __init__:
 		pass
 	def mainLoop():
-		ask(f"Day {day}\nWhat do you want to do?","Name = Actions", {Invest: "I", Banks: "B", })
+		ask(f"Day {day}\nWhat do you want to do?","Name = Actions", {Invest: "I", Banks: "B", Wait:"W", Stats:"S", Settings:"X"})
 
 #Tutorial
 def tutorial():
@@ -61,7 +61,7 @@ def tutorial():
 
 ### Main Game Loop ###
 def main_game():
-	print("===Work=In=Progress===(main game)")
+	option = askctl.mainLoop()
 
 
 ##Beginning##
