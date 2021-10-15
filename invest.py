@@ -35,10 +35,12 @@ def ask(q, h, **kwargs, help="True"):  #Universal ask function. Provide quesiton
 
 	if help:
 		options += "help"
+	else:
+		options = options[:-1
 
 	while True:
 		inpt = input("{} ({}): ".format(q, options))
-		if inpt == "help" && :
+		if inpt == "help" && help:
 			print(h)
 		else:
 			if inpt in optionl:
