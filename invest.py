@@ -1,5 +1,5 @@
 # By Leo-MathGuy
-# Not licenced but don't sell.
+# You can copy this code if you don't sell it, attribute it to me, and share it with this same licence.
 
 from math import *
 from time import sleep
@@ -49,7 +49,7 @@ def ask(q, h,  help="True", **kwargs):  #Universal ask function. Provide quesito
 			sleep(0.35)
 			print("Error: Unknown Input. Please enter valid option\n")
 
-class askctl:
+class askControl:
 	def __init__():
 		pass
 	def mainLoop():
@@ -63,7 +63,7 @@ def tutorial():
 ### Main Game Loop ###
 def main_game():
 	while True:
-		option = askctl.mainLoop()
+		option = askControl.mainLoop()
 		if option == "E":
 			break
 
