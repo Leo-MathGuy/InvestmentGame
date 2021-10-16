@@ -69,20 +69,33 @@ class bank:
 		self.name = name
 		self.joinFee = joinFee
 		self.maxCredit = maxCredit
-		self.maxBalace = maxMoney
-		self.decription = desc
+		self.maxBalance = maxMoney
+		self.description = desc
 
 bankList = [
 	bank("Pirate's Bank", "Hey matey? Have a bit o' gold ya want to keep safe? Well then you're in big luck! Pirate's Bank is open for ya matey! Arrrrrr!!", 0, 400, 1000),
 	bank("Meow Bank", "Meow meow meow! Meow meow. Mreaaaawww! Meow meow meoow? Meow!", 15, 1000, 5000)
 ]
 cBank = 0
+bankObj = bankList[cBank]
 
 def banks():
 	print(f"Current bank: {bankList[cBank].name}")
 	print(f"Balance: {money}")
-	option = askControl.bank()
-	
+	while True:
+		option = askControl.bank()
+		match option:
+			case "E":
+				return
+			case "D":
+				print("-" * 20)
+				print(f"Bank: {bankObj.name}")
+				print(f"Description: {bankObj.description}")
+				print(f"Maximum credit: {bankObj.maxCredit}")
+				print(f"Max balace: {bankObj.maxBalance}")
+				print("-" * 20)
+			case "C":
+				print("Work In Progress")
 #Tutorial
 def tutorial():
 	print("===Work=In=Progress===(tutorial)")
