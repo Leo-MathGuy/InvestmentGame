@@ -75,7 +75,7 @@ def main_game():
 gamemode_obj = {"Very Easy":gveasy, "Easy":geasy, "Medium":gmed, "Hard":ghard, "Very Hard":gvhard, "Brutal":gbrut}
 gamemode = ask("Pick gamemode: ", "Easier gamemodes have more starting money and less goals. Very easy is reccomended for first-timers.", **gamemode_obj)
 
-money = gamemode.startmoney
+money = gamemode.start
 
 #Game mode setup
 gname = gamemode.name
