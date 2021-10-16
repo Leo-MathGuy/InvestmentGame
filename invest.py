@@ -50,13 +50,39 @@ def ask(q, h,  help="True", **kwargs):  #Universal ask function. Provide quesito
 			sleep(0.35)
 			print("Error: Unknown Input. Please enter valid option\n")
 
+whatDo = "What do you want to do?"
+
 class askControl:
 	def __init__():
 		pass
+	
 	def mainLoop():
 		opts = {"Invest": "I", "Banks": "B", "Wait":"W", "Stats":"S", "Settings":"X", "Exit":"E"}
-		return ask(f"What do you want to do?","Name = Actions", False, **opts)
+		return ask(whatDo, "Option = Action", **opts)
+	def bank():
+		opts = {"Details": "D", "Change Bank": "C", "Exit": "E"}
+		return ask(whatDo, "", False, **opts)
+# Banks
 
+class bank:
+	def __init__(self, name, desc, joinFee, maxCredit, maxMoney):
+		self.name = name
+		self.joinFee = joinFee
+		self.maxCredit = maxCredit
+		self.maxBalace = maxMoney
+		self.decription = desc
+
+bankList = [
+	bank("Pirate's Bank", "Hey matey? Have a bit o' gold ya want to keep safe? Well then you're in big luck! Pirate's Bank is open for ya matey! Arrrrrr!!", 0, 400, 1000),
+	bank("Meow Bank", "Meow meow meow! Meow meow. Mreaaaawww! Meow meow meoow? Meow!", 15, 1000, 5000)
+]
+cBank = 0
+
+def banks():
+	print(f"Current bank: {bankList[cBank].name}")
+	print(f"Balance: {money}")
+	option = askControl.bank()
+	
 #Tutorial
 def tutorial():
 	print("===Work=In=Progress===(tutorial)")
@@ -64,10 +90,13 @@ def tutorial():
 ### Main Game Loop ###
 def main_game():
 	while True:
+		print("-" * 69)
 		print(f"Day {day}\nMoney: {money}")
 		option = askControl.mainLoop()
 		if option == "E":
 			break
+		elif option == "B":
+			banks()
 
 ##Beginning##
 
@@ -75,13 +104,13 @@ def main_game():
 gamemode_obj = {"Very Easy":gveasy, "Easy":geasy, "Medium":gmed, "Hard":ghard, "Very Hard":gvhard, "Brutal":gbrut}
 gamemode = ask("Pick gamemode: ", "Easier gamemodes have more starting money and less goals. Very easy is reccomended for first-timers.", **gamemode_obj)
 
-money = gamemode.start
-
 #Game mode setup
 gname = gamemode.name
 goal = gamemode.goal
 gstart = gamemode.start
 gadv = gamemode.advanced
+
+money = gstart
 if gadv: var = "On"
 else: var = "Off"
 
@@ -92,7 +121,7 @@ for item in list(ginit_dict.keys()):
 	sleep(0.25)
 	print(item, end='')
 	print(str(ginit_dict[item])+"\n")
-sleep(1.5)
+sleep(0.25)
 
 if ask("Do you want a tutorial?", "y = begin tutorial  n = skip tutorial", y=True, n=False):
 	tutorial()
