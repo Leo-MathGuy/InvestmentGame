@@ -82,10 +82,10 @@ if gadv: var = "On"
 else: var = "Off"
 
 ginit_dict = {"Name: ":gname, "Starting Money: $":gstart, "Goal: $":goal, "Advanced Mode: ":var}
+sleep(0.25)
 print("\n")
-sleep(0.75)
 for item in list(ginit_dict.keys()):
-	sleep(1.5)
+	sleep(0.25)
 	print(item, end='')
 	print(str(ginit_dict[item])+"\n")
 sleep(1.5)
