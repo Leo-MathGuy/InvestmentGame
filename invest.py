@@ -55,7 +55,7 @@ class askControl:
 		pass
 	def mainLoop():
 		opts = {"Invest": "I", "Banks": "B", "Wait":"W", "Stats":"S", "Settings":"X", "Exit":"E"}
-		return ask(f"Day {day}\nWhat do you want to do?","Name = Actions", False, **opts)
+		return ask(f"What do you want to do?","Name = Actions", False, **opts)
 
 #Tutorial
 def tutorial():
