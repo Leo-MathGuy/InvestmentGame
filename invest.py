@@ -9,6 +9,7 @@ print("By Leo-MathGuy \n")
 print("Welcome to the investment game! \n\n")
 
 day = 1
+money = 0
 
 # Game Modes
 class gamemode:
@@ -63,6 +64,7 @@ def tutorial():
 ### Main Game Loop ###
 def main_game():
 	while True:
+		print(f"Day {day}\nMoney: {money}")
 		option = askControl.mainLoop()
 		if option == "E":
 			break
@@ -72,6 +74,8 @@ def main_game():
 # Game mode select
 gamemode_obj = {"Very Easy":gveasy, "Easy":geasy, "Medium":gmed, "Hard":ghard, "Very Hard":gvhard, "Brutal":gbrut}
 gamemode = ask("Pick gamemode: ", "Easier gamemodes have more starting money and less goals. Very easy is reccomended for first-timers.", **gamemode_obj)
+
+money = gamemode.startmoney
 
 #Game mode setup
 gname = gamemode.name
