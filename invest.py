@@ -66,10 +66,8 @@ def ask(q, h,  help=True, **kwargs):  #Universal ask function. Provide quesiton,
 		else:
 			for item in optionl:
 				if inpt.title() == item:
-					sleep(0.2)
 					return kwargs[inpt.title()]
 		
-			sleep(0.35)
 			print("Error: Unknown Input. Please enter valid option\n")
 
 ################################################################################################################################
@@ -149,13 +147,15 @@ def banks():
 							print(f"Joining Fee: {nextBank.joinFee}")
 							print(f"Max Balance: {nextBank.maxBalance}")
 							print(f"Max Credit: {nextBank.maxCredit}\n")
-							option = askControl.bankTwo()
+						option = askControl.bankTwo()
 						skipped = False
 						match option:
 							case "N":
 								if cBank+i+1 == len(bankList):
-									print("\nSorry, this is the final bank")
-									i -= 2
+									line(50)
+									print("Sorry, this is the final bank")
+									line(50)
+									i -= 1
 									skipped = True
 								else:
 									continue
@@ -180,13 +180,20 @@ def tutorial():
 ################################################################################################################################
 
 ### Main Game Loop ###
+exit = False
 def main_game():
+	global exit
+	
 	while True:
+		if exit:
+			break
+		
 		line(69)
 		print(f"Day {day}\nMoney: {money}")
 		option = askControl.mainLoop()
+		
 		if option == "E":
-			break
+			exit = True
 		elif option == "B":
 			line(69)
 			banks()
