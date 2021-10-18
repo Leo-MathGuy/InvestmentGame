@@ -79,7 +79,7 @@ def ask(q, h,  help=True, mega=False,  **kwargs):  #Universal ask function. Prov
 			for key in keys:
 				print(key + f" [{kwargs[key]}]")
 			
-			inpt = input("\nChoose an option: ")
+			inpt = input("\n-Choose an option: ")
 			
 			if inpt.title() in list(kwargs.values()):
 				return inpt.title()
