@@ -47,29 +47,47 @@ gbrut = gamemode("Brutal", True, 30, 500)
 
 ################################################################################################################################
 
-def ask(q, h,  help=True, **kwargs):  #Universal ask function. Provide quesiton, help, and kwargs as option:return
-	optionl = list(kwargs.keys())
-	options = ""
-	for i in range(0, len(optionl)):
-		options += str(optionl[i])
-		options += "/"
-
-	if help:
-		options += "Help"
-	else:
-		options = options[:-1]
-
-	while True:
-		inpt = input("{} ({}): ".format(q, options))
-		if inpt == "help" and help:
-			print(h)
+def ask(q, h,  help=True, mega=False,  **kwargs):  #Universal ask function. Provide quesiton, help, and kwargs as option:return
+	if not mega:
+		optionl = list(kwargs.keys())
+		options = ""
+		for i in range(0, len(optionl)):
+			options += str(optionl[i])
+			options += "/"
+	
+		if help:
+			options += "Help"
 		else:
-			for item in optionl:
-				if inpt.title() == item:
-					return kwargs[inpt.title()]
-		
-			print("Error: Unknown Input. Please enter valid option\n")
+			options = options[:-1]
+	
+		while True:
+			inpt = input("{} ({}): ".format(q, options))
+			if inpt == "help" and help:
+				print(h)
+			else:
+				for item in optionl:
+					if inpt.title() == item:
+						return kwargs[inpt.title()]
+			
+				print("Error: Unknown Input. Please enter valid option\n")
+	
+	else:
+		keys = list(kwargs.keys())
 
+		print(q + "\n")
+		while True:
+			for key in keys:
+				print(key + f" [{kwargs[key]}]")
+			
+			inpt = input("\nChoose an option: ")
+			
+			if inpt.title() in list(kwargs.values()):
+				return inpt.title()
+			elif inpt.title() in keys:
+				return kwargs[inpt.title()]
+			else:
+				print("\nPlease enter a valid option.\n")
+			
 ################################################################################################################################
 
 whatDo = "What do you want to do?"
@@ -80,13 +98,13 @@ class askControl:
 	
 	def mainLoop():
 		opts = {"Invest": "I", "Banks": "B", "Wait":"W", "Stats":"S", "Settings":"X", "Exit":"E"}
-		return ask(whatDo, "Option = Action. You do not need to capitaliaze", **opts)
+		return ask(whatDo, "Option = Action.", True, True, **opts)
 	def bank():
 		opts = {"Details": "D", "Change Bank": "C", "Exit": "E"}
-		return ask(whatDo, "", False, **opts)
+		return ask(whatDo, "", False, True, **opts)
 	def bankTwo():
 		opts = {"Join Bank": "J", "Next Bank": "N", "Exit": "E"}
-		return ask(whatDo, "", False, **opts)
+		return ask(whatDo, "", False, True, **opts)
 
 
 ################################################################################################################################
