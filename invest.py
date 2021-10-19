@@ -188,6 +188,9 @@ def banks():
 									print("\nBank joined!\n")
 									line(15)
 									break
+								else:
+									print("Not enough money!")
+									break
 							case "E":
 								break
 
