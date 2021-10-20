@@ -123,8 +123,9 @@ class bank:
 bankList = [
 	bank("Pirate's Bank", "Hey matey? Have a bit o' gold ya want to keep safe? Well then you're in big luck! Pirate's Bank is open for ya matey! Arrrrrr!!", 0, 400, 1000),
 	bank("Meow Bank", "Meow meow meow! Meow meow. Mreaaaawww! Meow meow meoow? Meow!", 500, 1000, 5000),
-	bank("Bank of Trolls", "What did you say again? (x42)", 5000, 10000, 100000),
+	bank("Bank of Trolls", "What did you say again? (x42)", 2050, 10000, 100000),
 	bank("Bank Chicken", "n cfnfcv,mdkswedkmrejkwse,rjiw3ujrfkmesjndmkesnjwhemk", 5773, 2323, 8579)
+	bank("Ultimatum", "For millionares!", 5000, 25000, 1000000000000000)
 ]
 cBank = 0
 bankObj = bankList[cBank]
