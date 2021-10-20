@@ -125,7 +125,7 @@ bankList = [
 	bank("Meow Bank", "Meow meow meow! Meow meow. Mreaaaawww! Meow meow meoow? Meow!", 500, 1000, 5000),
 	bank("Bank of Trolls", "What did you say again? (x42)", 5000, 10000, 100000),
 	bank("Bank Chicken", "n cfnfcv,mdkswedkmrejkwse,rjiw3ujrfkmesjndmkesnjwhemk", 5773, 2323, 8579)
-6 g
+]
 cBank = 0
 bankObj = bankList[cBank]
 
