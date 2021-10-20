@@ -137,7 +137,7 @@ def banks():
 	global cBank
 	
 	print(f"Current bank: {bankList[cBank].name}")
-	print(f"Balance: {money}")
+	print(f"Balance: ${money}")
 	while True:
 		option = askControl.bank()
 		line(50)
@@ -147,9 +147,9 @@ def banks():
 			case "D":
 				line(20)
 				print(f"Bank: {bankObj.name}")
-				print(f"Description: {bankObj.description}")
-				print(f"Maximum credit: {bankObj.maxCredit}")
-				print(f"Max balace: {bankObj.maxBalance}")
+				print(f"Description: ${bankObj.description}")
+				print(f"Maximum credit: ${bankObj.maxCredit}")
+				print(f"Max balace: ${bankObj.maxBalance}")
 				line(20)
 			case "C":
 				if cBank+1 == len(bankList):
@@ -165,9 +165,9 @@ def banks():
 							print("\nNext bank:")
 							print(f"Name: {nextBank.name}")
 							print(f"Description: {nextBank.description}")
-							print(f"Joining Fee: {nextBank.joinFee}")
-							print(f"Max Balance: {nextBank.maxBalance}")
-							print(f"Max Credit: {nextBank.maxCredit}\n")
+							print(f"Joining Fee: ${nextBank.joinFee}")
+							print(f"Max Balance: ${nextBank.maxBalance}")
+							print(f"Max Credit: ${nextBank.maxCredit}\n")
 						option = askControl.bankTwo()
 						skipped = False
 						match option:
@@ -190,7 +190,9 @@ def banks():
 									line(15)
 									break
 								else:
+									line(25)
 									print("Not enough money!")
+									line(25)
 									break
 							case "E":
 								break
@@ -213,7 +215,7 @@ def main_game():
 			break
 		
 		line(69)
-		print(f"Day {day}\nMoney: {money}")
+		print(f"Day {day}\nMoney: ${money}")
 		option = askControl.mainLoop()
 		
 		if option == "E":
