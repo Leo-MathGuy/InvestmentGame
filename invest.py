@@ -8,7 +8,10 @@ Line function
 Gamemode
 Ask
 Ask control
+Money
 Banks
+Wait
+Stats
 Tutorial
 Main game
 Beginning
@@ -21,6 +24,7 @@ print("By Leo-MathGuy \n")
 print("Welcome to the investment game! \n\n")
 
 day = 1
+hour = 8
 money = 0
 
 # Beatiful seperator
@@ -93,22 +97,70 @@ def ask(q, h,  help=True, mega=False,  **kwargs):  #Universal ask function. Prov
 whatDo = "What do you want to do?"
 
 class askControl:
+
 	def __init__():
 		pass
 	
 	def mainLoop():
 		opts = {"Invest": "I", "Banks": "B", "Wait":"W", "Stats":"S", "Settings":"X", "Exit":"E"}
 		return ask(whatDo, "Option = Action.", True, True, **opts)
+
 	def bank():
 		opts = {"Details": "D", "Change Bank": "C", "Exit": "E"}
 		return ask(whatDo, "", False, True, **opts)
+
 	def bankTwo():
 		opts = {"Join Bank": "J", "Next Bank": "N", "Exit": "E"}
+		return ask(whatDo, "", False, True, **opts)
+
+	def wait():
+		opts = {"Sleep till 8:00": "S"}
 		return ask(whatDo, "", False, True, **opts)
 
 
 ################################################################################################################################
 
+# Money
+
+added = 0;
+used = 0;
+
+class moneyControl:
+
+	def add(x):
+		global money
+		money += x
+		added += x
+
+	def subtract(x):
+		global money
+		money -= x
+		used += x
+
+################################################################################################################################
+
+# Wait
+
+def wait():
+	global day
+	global hour
+	
+	option = askControl.wait()
+	
+	match option:
+		case "S":
+			print("Sleeping", end="", flush=True)
+			sleep(0.3)
+			print(".", end="", flush=True)
+			sleep(0.3)
+			print(".", end="", flush=True)
+			sleep(0.3)
+			print(".")
+			
+			day += 1
+			hour = 8
+			
+################################################################################################################################
 
 # Banks
 
@@ -132,46 +184,59 @@ bankObj = bankList[cBank]
 
 
 def banks():
+	
 	global money
 	global bankObj
 	global cBank
 	
-	print(f"Current bank: {bankList[cBank].name}")
+	print(f"Current bank: {bankList[cBank].name}") # Print current bank stats
 	print(f"Balance: ${money}")
-	while True:
-		option = askControl.bank()
+	
+	while True: # Menu
+	
+		option = askControl.bank() # Ask
 		line(50)
+		
 		match option:
-			case "E":
+			
+			case "E": # Exit
 				return
-			case "D":
+			
+			case "D": # Details
 				line(20)
-				print(f"Bank: {bankObj.name}")
+				print(f"Bank: {bankObj.name}")					# Details
 				print(f"Description: ${bankObj.description}")
 				print(f"Maximum credit: ${bankObj.maxCredit}")
 				print(f"Max balace: ${bankObj.maxBalance}")
 				line(20)
-			case "C":
-				if cBank+1 == len(bankList):
+			
+			case "C":	# Change Bank
+	
+				if cBank+1 == len(bankList): # If final bank
 					print("Sorry, this is the final bank")
 					line(69)
 				else:
 					skipped = False
 					i = 0
+					
 					while True:
 						i += 1
 						nextBank = bankList[cBank+i]
-						if not skipped:
+					
+						if not skipped: # To beatify
 							print("\nNext bank:")
 							print(f"Name: {nextBank.name}")
 							print(f"Description: {nextBank.description}")
 							print(f"Joining Fee: ${nextBank.joinFee}")
 							print(f"Max Balance: ${nextBank.maxBalance}")
 							print(f"Max Credit: ${nextBank.maxCredit}\n")
-						option = askControl.bankTwo()
+					
+						option = askControl.bankTwo() # Ask as well
 						skipped = False
-						match option:
-							case "N":
+						
+						match option: # Menu
+						
+							case "N": # Next bank
 								if cBank+i+1 == len(bankList):
 									line(50)
 									print("Sorry, this is the final bank")
@@ -180,7 +245,9 @@ def banks():
 									skipped = True
 								else:
 									continue
-							case "J":
+								
+							case "J": # Join
+							
 								if nextBank.joinFee <= money:
 									cBank += i
 									bankObj = nextBank
@@ -194,8 +261,16 @@ def banks():
 									print("Not enough money!")
 									line(25)
 									break
-							case "E":
+								
+							case "E": # Exit
 								break
+							
+################################################################################################################################
+
+# Stats
+
+def stats():
+	print(f"Day: {day}\nMoney: ${money}\nTotal money earned: ${added}\nTotal money used: ${used}")
 
 ################################################################################################################################
 
@@ -215,14 +290,22 @@ def main_game():
 			break
 		
 		line(69)
-		print(f"Day {day}\nMoney: ${money}")
+		print(f"Day {day}\nHour {hour}\nMoney: ${money}")
 		option = askControl.mainLoop()
 		
-		if option == "E":
-			exit = True
-		elif option == "B":
-			line(69)
-			banks()
+		match option:
+			case "E":
+				exit = True
+			case "B":
+				line(69)
+				banks()
+			case "S":
+				line(69)
+				stats()
+			case "W":
+				line(69)
+				wait()
+			
 
 ################################################################################################################################
 
@@ -242,7 +325,7 @@ money = gstart
 if gadv: var = "On"
 else: var = "Off"
 
-ginit_dict = {"Name: ":gname, "Starting Money: $":gstart, "Goal: $":goal, "Advanced Mode: ":var}
+ginit_dict = {"\nName: ":gname, "Starting Money: $":gstart, "Goal: $":goal, "Advanced Mode: ":var}
 
 for item in list(ginit_dict.keys()):
 	sleep(0.25)
