@@ -9,8 +9,8 @@ Gamemode
 Ask
 Ask control
 Money
-Banks
 Wait
+Banks
 Stats
 Tutorial
 Main game
@@ -25,6 +25,7 @@ print("Welcome to the investment game! \n\n")
 
 day = 1
 hour = 8
+minute = 0
 money = 0
 
 # Beatiful seperator
@@ -102,7 +103,7 @@ class askControl:
 		pass
 	
 	def mainLoop():
-		opts = {"Invest": "I", "Banks": "B", "Wait":"W", "Stats":"S", "Settings":"X", "Exit":"E"}
+		opts = {"Invest": "I", "Banks": "B", "Wait":"W", "Stats":"S", "Shop":"H", "Settings":"X", "Exit":"E"}
 		return ask(whatDo, "Option = Action.", True, True, **opts)
 
 	def bank():
@@ -114,7 +115,7 @@ class askControl:
 		return ask(whatDo, "", False, True, **opts)
 
 	def wait():
-		opts = {"Sleep till 8:00": "S"}
+		opts = {"Sleep till 8:00": "S", "Custom": "C"}
 		return ask(whatDo, "", False, True, **opts)
 
 
@@ -141,14 +142,38 @@ class moneyControl:
 
 # Wait
 
+bedtime = 22
+caffeine = 0
+
 def wait():
+	
+	## Error Messages
+	
+	def caffeine():
+		line(43)
+		print("Take caffeine to extend bedtime temporarily")
+		line(43)
+	
+	def integer():
+		line(21)
+		print("Please enter an integer")
+		line(21)
+		
+	## Global Variables
+	
 	global day
 	global hour
+	global minute
+	global bedtime
+	
+	## Menu
 	
 	option = askControl.wait()
 	
 	match option:
-		case "S":
+		
+		case "S":  # Sleep
+			
 			print("Sleeping", end="", flush=True)
 			sleep(0.3)
 			print(".", end="", flush=True)
@@ -159,6 +184,45 @@ def wait():
 			
 			day += 1
 			hour = 8
+			minute = 0
+			
+		case "C": # Custom
+			
+			# HOURS
+			
+			hoursLeft = bedtime - hour
+			
+			if minute != 0:
+				hoursLeft -= 1
+			
+			while True:
+				hours = input(f"Hours to wait(0-{hoursLeft}/Exit [E]): ")
+					
+				try:
+					hours = int(hours)
+				except ValueError:
+					if hours == "E" or hours == "e":
+						return
+					print("Please enter a integer")
+					continue
+				
+				if hours > hoursLeft:
+					caffeine()
+					continue
+				
+				elif hours < 0:
+					line(7)
+					print("Invalid")
+					line(7)
+					
+					continue
+				
+					
+				break
+			
+			# MINUTES
+			
+			
 			
 ################################################################################################################################
 
@@ -175,7 +239,7 @@ class bank:
 bankList = [
 	bank("Pirate's Bank", "Hey matey? Have a bit o' gold ya want to keep safe? Well then you're in big luck! Pirate's Bank is open for ya matey! Arrrrrr!!", 0, 400, 1000),
 	bank("Meow Bank", "Meow meow meow! Meow meow. Mreaaaawww! Meow meow meoow? Meow!", 500, 1000, 5000),
-	bank("Bank of Trolls", "What did you say again? (x42)", 2050, 10000, 100000),
+	bank("Bank of Trolls", "What did you say again?", 2050, 10000, 100000),
 	bank("Bank Chicken", "n cfnfcv,mdkswedkmrejkwse,rjiw3ujrfkmesjndmke=snjwhemk", 5773, 2323, 8579),
 	bank("Ultimatum", "For millionares!", 5000, 25000, 1000000000000000)
 ]
@@ -290,7 +354,7 @@ def main_game():
 			break
 		
 		line(69)
-		print(f"Day {day}\nHour {hour}\nMoney: ${money}")
+		print(f"Day {day}\nHour {hour}\nMinute {minute}\nMoney: ${money}")
 		option = askControl.mainLoop()
 		
 		match option:
